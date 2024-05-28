@@ -221,7 +221,7 @@ button {
 	#hamburger {
 		display: block;
 		position: relative;
-		left: calc(100vw - 9rem);
+		left: calc(100vw - 9px);
 	}
 
 	.container {

@@ -1,8 +1,26 @@
-import { CaretDownOutlined } from "@ant-design/icons";
+import { CaretDownOutlined, MenuOutlined } from "@ant-design/icons";
 import "./navbar.css";
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar: React.FC = () => {
+	const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+	const [isBrowseDropdownOpen, setIsBrowseDropdownOpen] = useState(false);
+	const [isDiscoverDropdownOpen, setIsDiscoverDropdownOpen] = useState(false);
+
+	const handleBrowseDropdownClick = () => {
+		setIsBrowseDropdownOpen((prev) => !prev);
+		setIsDiscoverDropdownOpen(false);
+	};
+
+	const handleDiscoverDropdownClick = () => {
+		setIsDiscoverDropdownOpen((prev) => !prev);
+		setIsBrowseDropdownOpen(false);
+	};
+
+	const handleHamburgerClick = () => {
+		setIsHamburgerOpen((prev) => !prev);
+	};
+
 	return (
 		<>
 			<header id="nav-menu">
@@ -12,18 +30,31 @@ const Navbar: React.FC = () => {
 							<img src="logo.svg" alt="logo" width="35" height="35" />
 						</a>
 						<nav className="menu">
-							<div className="menu">
+							<button
+								id="hamburger"
+								aria-expanded={isHamburgerOpen}
+								onClick={handleHamburgerClick}
+							>
+								<MenuOutlined className="bx bx-menu" aria-hidden="true" />
+							</button>
+							<div className={`menu ${isHamburgerOpen ? "show" : ""}`}>
 								<ul className="menu-bar">
 									<li>
 										<button
 											className="nav-link dropdown-btn"
 											data-dropdown="dropdown1"
-											aria-expanded="false"
+											aria-expanded={isBrowseDropdownOpen}
+											onClick={() => handleBrowseDropdownClick("dropdown1")}
 										>
 											Browse
 											<CaretDownOutlined aria-hidden="true" />
 										</button>
-										<div id="dropdown1" className="dropdown">
+										<div
+											id="dropdown1"
+											className={`dropdown ${
+												isBrowseDropdownOpen ? "active" : ""
+											}`}
+										>
 											<ul>
 												<li>
 													<a className="dropdown-link" href="#best-of-the-day">
@@ -115,12 +146,18 @@ const Navbar: React.FC = () => {
 										<button
 											className="nav-link dropdown-btn"
 											data-dropdown="dropdown2"
-											aria-expanded="false"
+											aria-expanded={isDiscoverDropdownOpen}
+											onClick={() => handleDiscoverDropdownClick("dropdown2")}
 										>
 											Discover
 											<CaretDownOutlined aria-hidden="true" />
 										</button>
-										<div id="dropdown2" className="dropdown">
+										<div
+											id="dropdown2"
+											className={`dropdown ${
+												isDiscoverDropdownOpen ? "active" : ""
+											}`}
+										>
 											<ul aria-labelledby="categories-title">
 												<span
 													id="categories-title"
