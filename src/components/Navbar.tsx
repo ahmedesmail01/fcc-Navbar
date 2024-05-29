@@ -29,14 +29,7 @@ const Navbar: React.FC = () => {
 						<a href="/" className="logo">
 							<img src="logo.svg" alt="logo" width="35" height="35" />
 						</a>
-						<nav className="menu">
-							<button
-								id="hamburger"
-								aria-expanded={isHamburgerOpen}
-								onClick={handleHamburgerClick}
-							>
-								<MenuOutlined className="bx bx-menu" aria-hidden="true" />
-							</button>
+						<nav className={`menu ${isHamburgerOpen ? "show" : ""}`}>
 							<div className={`menu ${isHamburgerOpen ? "show" : ""}`}>
 								<ul className="menu-bar">
 									<li>
@@ -44,7 +37,7 @@ const Navbar: React.FC = () => {
 											className="nav-link dropdown-btn"
 											data-dropdown="dropdown1"
 											aria-expanded={isBrowseDropdownOpen}
-											onClick={() => handleBrowseDropdownClick("dropdown1")}
+											onClick={() => handleBrowseDropdownClick()}
 										>
 											Browse
 											<CaretDownOutlined aria-hidden="true" />
@@ -147,7 +140,7 @@ const Navbar: React.FC = () => {
 											className="nav-link dropdown-btn"
 											data-dropdown="dropdown2"
 											aria-expanded={isDiscoverDropdownOpen}
-											onClick={() => handleDiscoverDropdownClick("dropdown2")}
+											onClick={() => handleDiscoverDropdownClick()}
 										>
 											Discover
 											<CaretDownOutlined aria-hidden="true" />
@@ -230,6 +223,13 @@ const Navbar: React.FC = () => {
 							</a>
 							<button className="btn btn-primary">Create</button>
 						</div>
+						<button
+							id="hamburger"
+							aria-expanded={isHamburgerOpen}
+							onClick={handleHamburgerClick}
+						>
+							<MenuOutlined className="bx bx-menu" aria-hidden="true" />
+						</button>
 					</div>
 				</div>
 			</header>

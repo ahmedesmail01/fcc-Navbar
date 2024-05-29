@@ -220,8 +220,6 @@ button {
 @media (max-width: 1100px) {
 	#hamburger {
 		display: block;
-		position: relative;
-		left: calc(100vw - 9px);
 	}
 
 	.container {
