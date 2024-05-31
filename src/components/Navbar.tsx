@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 	};
 
 	useEffect(() => {
-		const handleClickOutside = (event: React.MouseEvent<HTMLElement>) => {
+		const handleClickOutside = (event: MouseEvent) => {
 			if (!isBrowseDropdownOpen && !isDiscoverDropdownOpen) return;
 
 			const clickedElement = event.target;
