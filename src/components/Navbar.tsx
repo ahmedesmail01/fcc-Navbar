@@ -22,20 +22,21 @@ const Navbar: React.FC = () => {
 	};
 
 	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
+		const handleClickOutside = (event: React.MouseEvent<HTMLElement>) => {
 			if (!isBrowseDropdownOpen && !isDiscoverDropdownOpen) return;
 
-			const clickedElement = event.target;
+			const clickedElement = event.target as HTMLElement;
 			const browseDropdown = document.getElementById("dropdown1");
 			const discoverDropdown = document.getElementById("dropdown2");
-			const dropdownButton = document.querySelector(".dropdown-btn");
 
 			// Check if clicked outside dropdown and its button
 			if (
 				clickedElement !== browseDropdown &&
 				clickedElement !== discoverDropdown &&
-				!clickedElement.classList.contains("dropdown-btn") &&
-				!dropdownButton.contains(clickedElement)
+				!(
+					clickedElement && clickedElement.classList.contains("dropdown-btn")
+				) &&
+				!(dropdownButton && dropdownButton.contains(clickedElement))
 			) {
 				setIsBrowseDropdownOpen(false);
 				setIsDiscoverDropdownOpen(false);
