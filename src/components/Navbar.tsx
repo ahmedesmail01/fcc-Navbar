@@ -1,6 +1,6 @@
 import { CaretDownOutlined, MenuOutlined } from "@ant-design/icons";
 import "./navbar.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {
 	const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
@@ -20,6 +20,32 @@ const Navbar: React.FC = () => {
 	const handleHamburgerClick = () => {
 		setIsHamburgerOpen((prev) => !prev);
 	};
+
+	useEffect(() => {
+		const handleClickOutside = (event: React.MouseEvent<HTMLElement>) => {
+			if (!isBrowseDropdownOpen && !isDiscoverDropdownOpen) return;
+
+			const clickedElement = event.target;
+			const browseDropdown = document.getElementById("dropdown1");
+			const discoverDropdown = document.getElementById("dropdown2");
+			const dropdownButton = document.querySelector(".dropdown-btn");
+
+			// Check if clicked outside dropdown and its button
+			if (
+				clickedElement !== browseDropdown &&
+				clickedElement !== discoverDropdown &&
+				!clickedElement.classList.contains("dropdown-btn") &&
+				!dropdownButton.contains(clickedElement)
+			) {
+				setIsBrowseDropdownOpen(false);
+				setIsDiscoverDropdownOpen(false);
+			}
+		};
+
+		document.addEventListener("click", handleClickOutside);
+
+		return () => document.removeEventListener("click", handleClickOutside);
+	}, [isBrowseDropdownOpen, isDiscoverDropdownOpen]);
 
 	return (
 		<>
